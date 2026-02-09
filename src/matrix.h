@@ -28,4 +28,5 @@ void matrix_softmax(Matrix *m);
 // Utility
 void matrix_print(Matrix *m);
 
+Matrix * matrix_transpose(Matrix * m);
 #endif

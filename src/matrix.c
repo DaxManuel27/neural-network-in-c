@@ -112,3 +112,13 @@ void matrix_print(Matrix *m) {
     }
 }
 
+Matrix * matrix_transpose(Matrix * m){
+    Matrix * result = matrix_zeros(m->cols, m->rows);
+    for(int i = 0;  i < m->rows; i++){
+        for(int j = 0; j < m->cols; j++){
+            result->data[j * m->rows + i] = m->data[i * m->cols + j];
+        }
+    }
+    return result;
+}
+

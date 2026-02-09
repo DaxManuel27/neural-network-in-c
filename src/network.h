@@ -12,12 +12,32 @@ typedef struct {
     Layer * layers;
     int num_layers;
     int * layer_sizes;
+
+    Matrix ** activations;
+    int activations_allocated;
 }Network;
+
+typedef struct{
+    Matrix * dweights;
+    Matrix * dbias;
+}LayerGradients;
+
+typedef struct{
+    LayerGradients * gradients;
+    int num_layers;
+}NetworkGradients;
 
 Network * network_create(int * layer_sizes, int num_layers);
 void network_free(Network * net);
 
-Matrix * network_forward(Network * net, Matrix * input);
+void network_forward(Network * net, Matrix * input);
 void network_print_info(Network * net);
+
+
+float calculate_loss(Matrix * predictions, int true_label);
+NetworkGradients * network_backward(Network * net, Matrix * input, Matrix * output_gradient);
+void network_update_weights(Network * net, NetworkGradients * grads, float learning_rate);
+void gradients_free(NetworkGradients * grads);
+Matrix * output_gradient(Matrix * predictions, int true_label);
 
 #endif
