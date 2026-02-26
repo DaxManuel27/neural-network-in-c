@@ -2,7 +2,7 @@
 #define NETWORK_H
 
 #include "matrix.h"
-
+#include "train.h"
 typedef struct {
     Matrix * weights;
     Matrix * bias;
@@ -12,7 +12,7 @@ typedef struct {
     Layer * layers;
     int num_layers;
     int * layer_sizes;
-
+    int num_classes;
     Matrix ** activations;
     int activations_allocated;
 }Network;
@@ -34,7 +34,7 @@ typedef struct {
     float learning_rate;
 }NetworkConfig;
 
-Network * network_create_from_config(NetworkConfig * config)
+Network * network_create_from_config(NetworkConfig * config);
 
 Network * network_create(int * layer_sizes, int num_layers);
 void network_free(Network * net);

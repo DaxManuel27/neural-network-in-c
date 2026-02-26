@@ -11,7 +11,7 @@ Network* network_create(int *layer_sizes, int num_layers) {
     net->layers = malloc(net->num_layers * sizeof(Layer));
     net->activations = malloc(net->num_layers * sizeof(Matrix *));
     net->activations_allocated = 0;
-    
+    net->num_classes = layer_sizes[num_layers - 1];
     for (int i = 0; i < net->num_layers; i++) {
         int input_size = layer_sizes[i];
         int output_size = layer_sizes[i + 1];
