@@ -11,7 +11,7 @@ Network* network_create(int *layer_sizes, int num_layers) {
     net->layers = malloc(net->num_layers * sizeof(Layer));
     net->activations = malloc(net->num_layers * sizeof(Matrix *));
     net->activations_allocated = 0;
-    
+    net->num_classes = layer_sizes[num_layers - 1];
     for (int i = 0; i < net->num_layers; i++) {
         int input_size = layer_sizes[i];
         int output_size = layer_sizes[i + 1];
@@ -84,15 +84,6 @@ void network_forward(Network *net, Matrix *input) {
     }
 }
 
-float calculate_loss(Matrix * predictions, int true_label){
-    if(!predictions || true_label < 0 || true_label >=10){
-        return -0.1f;
-    }
-    float pred = predictions->data[true_label];
-    pred = fmax(pred, 1e-7f);
-    float loss = -log(pred);
-    return loss;
-}
 
 Matrix * output_gradient(Matrix * predictions, int true_label){
     if(!predictions || true_label < 0 || true_label >= 10){

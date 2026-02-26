@@ -12,10 +12,11 @@ typedef struct {
 }TrainerConfig;
 
 typedef struct {
-    float train_loss;
-    float train_accuracy;
-    float test_loss;
-    float test_accuracy;
+    float * train_loss;
+    float * train_accuracy;
+    float * test_loss;
+    float * test_accuracy;
+    int num_epochs;
 }TrainingResult;
 
 TrainingResult * train(Network * net, Dataset * train_data, Dataset * test_data, TrainerConfig * config);

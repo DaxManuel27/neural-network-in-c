@@ -68,40 +68,10 @@ Matrix* matrix_add_new(Matrix *a, Matrix *b) {
     return result;
 }
 
-void matrix_relu(Matrix *m) {
-    for (int i = 0; i < m->rows * m->cols; i++) {
-        if (m->data[i] < 0) m->data[i] = 0;
-    }
-}
 
-Matrix* matrix_relu_derivative(Matrix *m) {
-    Matrix *deriv = matrix_zeros(m->rows, m->cols);
-    for (int i = 0; i < m->rows * m->cols; i++) {
-        deriv->data[i] = (m->data[i] > 0) ? 1.0f : 0.0f;
-    }
-    return deriv;
-}
 
-void matrix_softmax(Matrix *m) {
-    int n = m->rows * m->cols;
 
-    float max_val = m->data[0];
-    for (int i = 1; i < n; i++) {
-        if (m->data[i] > max_val) max_val = m->data[i];
-    }
-    
 
-    float sum = 0.0f;
-    for (int i = 0; i < n; i++) {
-        m->data[i] = exp(m->data[i] - max_val);
-        sum += m->data[i];
-    }
-    
-
-    for (int i = 0; i < n; i++) {
-        m->data[i] /= sum;
-    }
-}
 
 void matrix_print(Matrix *m) {
     for (int i = 0; i < m->rows; i++) {
