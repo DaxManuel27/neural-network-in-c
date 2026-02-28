@@ -1,8 +1,11 @@
 #ifndef TRAINER_H
 #define TRAINER_H
 
-#include "framework.h"
+#include "matrix.h"
+#include "network.h"
 #include "dataset.h"
+#include "loss.h"
+
 
 typedef struct {
     int epochs;
@@ -20,5 +23,5 @@ typedef struct {
 }TrainingResult;
 
 TrainingResult * train(Network * net, Dataset * train_data, Dataset * test_data, TrainerConfig * config);
- 
-#endif
+void training_result_free(TrainingResult * result);
+#endif  

@@ -42,7 +42,7 @@ TrainingResult * train(Network * net, Dataset * train_data, Dataset * test_data,
 
             network_forward(net, image);
             Matrix * output = net->activations[net->num_layers - 1];
-            float loss = calculate_loss(output, label, LOSS_CROSS_ENTROPY);
+            float loss = calculate_loss(output, label);
             total_loss += loss;
             Matrix * output_grad = output_gradient(output, label);
             NetworkGradients * grads = network_backward(net, image, output_grad);
@@ -83,7 +83,7 @@ TrainingResult * train(Network * net, Dataset * train_data, Dataset * test_data,
                 Matrix *output = net->activations[net->num_layers - 1];
                 
                 // Calculate loss
-                float loss = calculate_loss(output, label, LOSS_CROSS_ENTROPY);
+                float loss = calculate_loss(output, label);
                 test_total_loss += loss;
                 
                 // Check accuracy

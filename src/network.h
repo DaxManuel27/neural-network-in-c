@@ -2,7 +2,7 @@
 #define NETWORK_H
 
 #include "matrix.h"
-#include "train.h"
+
 typedef struct {
     Matrix * weights;
     Matrix * bias;
@@ -30,7 +30,6 @@ typedef struct{
 typedef struct {
     int * layer_sizes;
     int num_layers;
-    ActivationType * activations;
     float learning_rate;
 }NetworkConfig;
 
@@ -43,7 +42,6 @@ void network_forward(Network * net, Matrix * input);
 void network_print_info(Network * net);
 
 
-float calculate_loss(Matrix * predictions, int true_label);
 NetworkGradients * network_backward(Network * net, Matrix * input, Matrix * output_gradient);
 void network_update_weights(Network * net, NetworkGradients * grads, float learning_rate);
 void gradients_free(NetworkGradients * grads);
