@@ -1,4 +1,4 @@
-#incldue "activations.h"
+#include "activations.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -8,7 +8,7 @@ static void relu_activate(Matrix *m) {
         if (m->data[i] < 0) m->data[i] = 0;
     }
 }
-static Matrix* matrix_relu_derivative(Matrix *m) {
+Matrix* matrix_relu_derivative(Matrix *m) {
     Matrix *deriv = matrix_zeros(m->rows, m->cols);
     for (int i = 0; i < m->rows * m->cols; i++) {
         deriv->data[i] = (m->data[i] > 0) ? 1.0f : 0.0f;
@@ -21,11 +21,11 @@ static void sigmoid_activate(Matrix * m){
         m->data[i] = 1.0f / (1.0f + exp(-m->data[i]));
     }
 }
-static Matrix * sigmoid derivative(Matrix * m){
+Matrix * sigmoid_derivative(Matrix * m){
     Matrix *deriv = matrix_zeros(m->rows, m->cols);
     for(int i = 0; i < m->rows * m->cols; i++){
         float sig = 1.0f / (1.0f + exp(-m->data[i]));
-        deriv->data[i] = sig * (1.0f - sig)
+        deriv->data[i] = sig * (1.0f - sig);
     }
     return deriv;
 }
@@ -93,8 +93,6 @@ Matrix* activation_derivative(Matrix *m, ActivationType type) {
     }
     
     switch (type) {
-        case ACTIVATION_RELU:
-            return relu_derivative(m);
         case ACTIVATION_SIGMOID:
             return sigmoid_derivative(m);
         case ACTIVATION_TANH:

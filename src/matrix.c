@@ -67,6 +67,35 @@ Matrix* matrix_add_new(Matrix *a, Matrix *b) {
     }
     return result;
 }
+// Apply ReLU: max(0, x)
+void matrix_relu(Matrix *m) {
+    for (int i = 0; i < m->rows * m->cols; i++) {
+        if (m->data[i] < 0) m->data[i] = 0;
+    }
+}
+
+// Softmax activation (for output layer)
+void matrix_softmax(Matrix *m) {
+    int n = m->rows * m->cols;
+    
+    // Find max for numerical stability
+    float max_val = m->data[0];
+    for (int i = 1; i < n; i++) {
+        if (m->data[i] > max_val) max_val = m->data[i];
+    }
+    
+    // Compute exp and sum
+    float sum = 0.0f;
+    for (int i = 0; i < n; i++) {
+        m->data[i] = exp(m->data[i] - max_val);
+        sum += m->data[i];
+    }
+    
+    // Normalize
+    for (int i = 0; i < n; i++) {
+        m->data[i] /= sum;
+    }
+}
 
 
 

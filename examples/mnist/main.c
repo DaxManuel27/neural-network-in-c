@@ -1,6 +1,7 @@
 #include "mnist.h"
-#include "matrix.h"
-#include "network.h"
+#include "../src/matrix.h"
+#include "../src/network.h"
+#include "../src/loss.h"
 #include <stdio.h>
 
 

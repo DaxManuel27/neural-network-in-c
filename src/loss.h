@@ -6,9 +6,11 @@
 typedef enum {
     LOSS_CROSS_ENTROPY,
     LOSS_MSE
-}LossType;
+} LossType;
 
-float calculate_loss(Matrix *predictions, int true_label, LossType type);
-Matrix* loss_gradient(Matrix *predictions, int true_label, LossType type);
+float calculate_loss_with_type(Matrix *predictions, int true_label, LossType type);
+float calculate_loss(Matrix *predictions, int true_label);
+Matrix* loss_gradient_with_type(Matrix *predictions, int true_label, LossType type);
+const char* loss_name(LossType type);
 
 #endif

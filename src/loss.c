@@ -101,3 +101,7 @@ const char* loss_name(LossType type) {
             return "Unknown";
     }
 }
+
+float calculate_loss(Matrix *predictions, int true_label) {
+    return calculate_loss_with_type(predictions, true_label, LOSS_CROSS_ENTROPY);
+}
